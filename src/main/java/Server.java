@@ -39,10 +39,10 @@ public class Server {
         }
     }
 
-//    public static void main(String[] args) throws IOException {
-//        ServerSocket serverSocket  = new ServerSocket(1234);
-//        Server server = new Server(serverSocket);
-//        System.out.println("Starting the server...");
-//        server.startServer();
-//    }
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket  = new ServerSocket(1234);
+        Server server = new Server(serverSocket);
+        System.out.println("Starting the server...");
+        server.startServer();
+    }
 }
