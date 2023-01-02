@@ -23,6 +23,7 @@ public class ClientHandler implements Runnable{
             // This so when user enter username and press enter.
             this.clientUserName = bufferedReader.readLine();
             clientHandlers.add(this);
+            sendCurrentUsersInChatForTheUser("Number Of Online Users: " + clientHandlers.size());
             broadcastMessage("Server: " + clientUserName + " has joined the chat!");
         } catch (IOException e){
             closeEverything(socket, bufferedWriter, bufferedReader);
@@ -78,6 +79,19 @@ public class ClientHandler implements Runnable{
 
         }
     }
+
+    private void sendCurrentUsersInChatForTheUser(String numberOfOnlineUsers) {
+        for (ClientHandler clientHandler: clientHandlers){
+            try {
+                clientHandler.bufferedWriter.write(numberOfOnlineUsers);
+                clientHandler.bufferedWriter.newLine();
+                clientHandler.bufferedWriter.flush();
+            } catch (IOException e){
+                closeEverything(socket, bufferedWriter, bufferedReader);
+            }
+        }
+    }
+
 
     // When client leaves the chat
     public void removeClientHandler(){
